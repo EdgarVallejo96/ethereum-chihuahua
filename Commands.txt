@@ -1,0 +1,13 @@
+Migrate the contract de deploy it to the bockchain:
+truffle migrate
+
+
+Enter the truffle console:
+truffle console
+
+
+Get an instance of our smart contract to see if the deployment worked:
+Control.deployed().then(function(instance) { app = instance })
+Notes = 
+The .then calls the promise after it finishes
+Smart contract have an asyncrhonous nature
