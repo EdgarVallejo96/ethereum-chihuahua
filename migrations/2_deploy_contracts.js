@@ -1,5 +1,5 @@
-var Control = artifacts.require("./Control.sol"); // Expose the contract to interact with it
+var Election = artifacts.require("./Election.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(Control);
+  deployer.deploy(Election);
 };
