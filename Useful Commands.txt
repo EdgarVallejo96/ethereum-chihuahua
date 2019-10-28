@@ -1,0 +1,6 @@
+Reports.deployed().then(function(instance) { app = instance })
+
+app.reports(1).then(function(c) { report = c;})
+
+ web3.eth.getAccounts().then(accounts => { accounts = accounts; })
+ accounts[0]
