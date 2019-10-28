@@ -1,13 +1,27 @@
 Migrate the contract de deploy it to the bockchain:
 truffle migrate
 
+Redeploy the project to the blockchain deleting the previous dapp
+truffle migrate --reset
+
 
 Enter the truffle console:
 truffle console
 
 
 Get an instance of our smart contract to see if the deployment worked:
-Control.deployed().then(function(instance) { app = instance })
+Election.deployed().then(function(instance) { app = instance })
 Notes = 
 The .then calls the promise after it finishes
 Smart contract have an asyncrhonous nature
+
+Get an instance of the smart contract with multiple reports
+Election.deployed().then(function(i) { app=i; })
+
+Create a variable 
+app.candidates(1).then(function(r) { report = r; })
+
+Show a report
+report[0]
+
+git -rm --cached packag-lock.json
