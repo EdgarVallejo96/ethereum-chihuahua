@@ -1,15 +1,15 @@
 App = {
   web3Provider: null,
   contracts: {},
-  account: '0x0',
+  account: 0x0,
 
-  init: function() {
+  init: function () {
     return App.initWeb3();
   },
   // Connects our client side app to our local blockchain
-  initWeb3: function() {
+  initWeb3: function () {
     // TODO: refactor conditional
-    if(typeof web3 !== 'undefined') {
+    if (typeof web3 !== 'undefined') {
       // If a web3 instance is already provided by Meta Mask.
       App.web3Provider = web3.currentProvider;
       web3 = new Web3(web3.currentProvider);
@@ -21,8 +21,8 @@ App = {
     return App.initContract();
   },
   // Loads up our contract into our loads up our contract into our front-end app to interact with it
-  initContract: function() {
-    $.getJSON("Reports.json", function(Reports) {
+  initContract: function () {
+    $.getJSON("Reports.json", function (Reports) {
       // Instantiate a new truffle contract from the artifact
       App.contracts.Reports = TruffleContract(Reports);
       // Connect provider to interact with contract
@@ -32,7 +32,7 @@ App = {
     });
   },
   // 1. Display the account that we are connected to the blockchain with 2. List all of the candidates in our election
-  render: function() {
+  render: function () {
     var reportsInstance;
     var loader = $("#loader");
     var content = $("#content");
@@ -41,56 +41,78 @@ App = {
     content.hide();
 
     // Load account data
-     web3.eth.getCoinbase(function(err, account) {
-      if(err === null) {
-        App.account = account;
-        $("accountAddress").html("Your Account: " + account);
+      web3.eth.getCoinbase(function (err, account) {
+       console.log("getCoinbase() account:", account);
+      if (err === null) {
+        App.account = account.toString();
+        console.log("App.account:", App.account);
+        document.getElementById("accountAddress").innerHTML = account;
+        //$("accountAddress").html("Your Account: " + account);
       }
     });
 
-    // Load account data with getAccounts().
- /*    web3.eth.getAccounts().then(accountsResponse => {
-       account = accountsResponse[0]; 
-       $("accountAddress").html("Your Account: " + account);
-      }).catch(error => {
-        console.log("Error:", error);
-      }) */
+      // Load contract data 
+      App.contracts.Reports.deployed().then(function (instance) {
+        reportsInstance = instance;
+        return reportsInstance.reportsCount();
+      }).then(function (reportsCount) {
+        var reportsResults = $("#reportsResults");
+        reportsResults.empty();
 
-    // Load contract data 
+        for (var i = 1; i <= reportsCount; i++) {
+          reportsInstance.reports(i).then(function (report) {
+            var id = report[0];
+            var name = report[1];
+            var voteCount = report[2];
+            var fecha = report[3];
+            var enfermedad = report[4];
+            var tratamiento = report[5];
+            var resultados = report[6];
+
+
+            // Render report Result
+            var reportTemplate = 
+            "<tr><th>" + id +
+            "</th><td>" + name +
+            "</td><td>" + voteCount +
+            "</th><td>" + fecha +
+            "</td><td>" + enfermedad +
+            "</th><td>" + tratamiento +
+            "</td><td>" + resultados +
+           // "</td><td><button type='button' onclick= 'App.castVerification(" + App.account.toString() + ", " + id +")'>Verificar</button>" +
+            "</td><td><button type='button' onclick= 'App.castVerification(" + id +")'>Verificar</button>" +
+
+            "</td></tr>"
+            reportsResults.append(reportTemplate);
+          });
+        }
+
+        loader.hide();
+        content.show();
+      }).catch(function (error) {
+        console.warn(error);
+      });
+  },
+
+  castVerification: function(reportId) {
+    console.log("castVerification() con", App.account.toString(), "y", reportId);
+    //var candidateId = $('#candidatesSelect').val();
     App.contracts.Reports.deployed().then(function(instance) {
-      reportsInstance = instance;
-      return reportsInstance.reportsCount();
-    }).then(function(reportsCount) {
-      var reportsResults = $("#reportsResults");
-      reportsResults.empty();
+      //return instance.addStakeholder(walletAddress.toString(), reportId,  { from: App.account });
+      return instance.addStakeholder(App.account, reportId);
 
-      for(var i= 1; i <= reportsCount; i++) {
-        reportsInstance.reports(i).then(function(report) {
-          var id = report[0];
-          var name = report[1];
-          var voteCount = report[2];
-          var fecha = report[3];
-          var enfermedad = report[4];
-          var tratamiento = report[5];
-          var resultados = report[6];
-          
-
-          // Render candidate Result
-          var reportTemplate = "<tr><th>" + id + "</th><td>" + name + "</td><td>" + voteCount + "</th><td>" + fecha + "</td><td>" + enfermedad + "</th><td>" + tratamiento + "</td><td>" + resultados +"</td></tr>"
-          reportsResults.append(reportTemplate);
-        });
-      }
-
-      loader.hide();
-      content.show();
-    }).catch(function(error) {
-      console.warn(error);
+    }).then(function(result) {
+      console.log("Verification was cast correctly.");
+    }).catch(function(err) {
+      console.error(err);
     });
   }
+
+
 };
 
-$(function() {
-  $(window).load(function() {
+$(function () {
+  $(window).load(function () {
     App.init();
   });
 });

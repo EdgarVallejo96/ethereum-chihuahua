@@ -13,7 +13,7 @@ contract Reports {
     }
     struct Stakeholder {
         uint id;
-        string walletAddress;
+        address walletAddress;
         uint reportId;
     }
 
@@ -46,8 +46,8 @@ contract Reports {
 
 
     function addStakeholder (
-    string memory _walletAddress,
-    uint _reportId) private {
+    address _walletAddress,
+    uint _reportId) public {
         stakeholdersCount ++;
         stakeholders[stakeholdersCount] = Stakeholder(stakeholdersCount, _walletAddress, _reportId);
     }
