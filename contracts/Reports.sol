@@ -10,6 +10,7 @@ contract Reports {
         string disease;
         string treatment;
         string results;
+        bool verified;
     }
     struct Stakeholder {
         uint id;
@@ -41,14 +42,31 @@ contract Reports {
     string memory _treatment,
     string memory _results) private {
         reportsCount ++;
-        reports[reportsCount] = Report(reportsCount, _name, _age, _date, _disease, _treatment, _results);
+        reports[reportsCount] = Report(reportsCount, _name, _age, _date, _disease, _treatment, _results, false);
     }
 
 
-    function addStakeholder (
+     function addStakeholder (
     address _walletAddress,
     uint _reportId) public {
         stakeholdersCount ++;
         stakeholders[stakeholdersCount] = Stakeholder(stakeholdersCount, _walletAddress, _reportId);
     }
+
+     function verifyReport (
+        uint _reportId
+    ) public {
+        Report storage pivotReport = reports[_reportId];
+        pivotReport.verified = true;
+    }
+
+    function verifyReportFinal  (
+    address _walletAddress,
+    uint _reportId) public {
+        stakeholdersCount ++;
+        stakeholders[stakeholdersCount] = Stakeholder(stakeholdersCount, _walletAddress, _reportId);
+        Report storage pivotReport = reports[_reportId];
+        pivotReport.verified = true;
+    }
+
 }

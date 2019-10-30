@@ -68,6 +68,7 @@ App = {
             var enfermedad = report[4];
             var tratamiento = report[5];
             var resultados = report[6];
+            var verified = report[7];
 
 
             // Render report Result
@@ -79,6 +80,7 @@ App = {
             "</td><td>" + enfermedad +
             "</th><td>" + tratamiento +
             "</td><td>" + resultados +
+            "</td><td>" + verified +
            // "</td><td><button type='button' onclick= 'App.castVerification(" + App.account.toString() + ", " + id +")'>Verificar</button>" +
             "</td><td><button type='button' onclick= 'App.castVerification(" + id +")'>Verificar</button>" +
 
@@ -95,17 +97,25 @@ App = {
   },
 
   castVerification: function(reportId) {
+    let reportsInstance;
     console.log("castVerification() con", App.account.toString(), "y", reportId);
-    //var candidateId = $('#candidatesSelect').val();
     App.contracts.Reports.deployed().then(function(instance) {
-      //return instance.addStakeholder(walletAddress.toString(), reportId,  { from: App.account });
-      return instance.addStakeholder(App.account, reportId);
+      reportsInstance = instance;
 
+     /*  return reportsInstance.addStakeholder(App.account, reportId);
     }).then(function(result) {
+      console.log("User wallet was correctly.");
+      return reportsInstance.verifyReport(reportId); */
+
+      return reportsInstance.verifyReportFinal(App.account, reportId);
+
+    }).then(function(verificationResult) {
       console.log("Verification was cast correctly.");
+      location.reload();
     }).catch(function(err) {
       console.error(err);
     });
+
   }
 
 

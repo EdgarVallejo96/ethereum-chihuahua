@@ -28,6 +28,9 @@ stakeholderObject = {
 app.stakeholdersCount().then(count => { stakeholdersCount = count})
 stakeholdersCount.toNumber()
 
+app.verifyReport(1).then(response => { app.reports(1).then(function(c) { report = c;})})
+report 
+
 
 
  web3.eth.getAccounts().then(accounts => { accounts = accounts; })
