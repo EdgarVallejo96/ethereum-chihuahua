@@ -109,32 +109,12 @@
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
 
-            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-search fa-fw"></i>
-              </a>
-              <!-- Dropdown - Messages -->
-              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
-                  <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </li>
-
-            <div class="topbar-divider d-none d-sm-block"></div>
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">User:</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Blockchain User</span>
+                <img class="img-profile rounded-circle" src="https://yt3.ggpht.com/a/AGF-l79StRyDW9A-TohGZhSpmio2pwh8zQX-d5HNOQ=s900-c-k-c0xffffffff-no-rj-mo">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -229,7 +209,7 @@
                         <p class="text-center">Cargando...</p>
                       </div>
                       <div id="content" style="display: none;">
-                        <table class="table">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                           <thead>
                             <tr>
                               <th scope="col">ID</th>
@@ -239,10 +219,21 @@
                               <th scope="col">Enfermedad</th>
                               <th scope="col">Tratamiento</th>
                               <th scope="col">Resultados</th>
-                              <th scope="col">Participantes</th>
-                              <th scope="col">Indices</th>
+                              <!-- <th scope="col">Participantes</th> -->
                             </tr>
                           </thead>
+                          <tfoot>
+                            <tr>
+                              <th scope="col">ID</th>
+                              <th scope="col">Nombre</th>
+                              <th scope="col">Edad</th>
+                              <th scope="col">Fecha</th>
+                              <th scope="col">Enfermedad</th>
+                              <th scope="col">Tratamiento</th>
+                              <th scope="col">Resultados</th>
+                              <!-- <th scope="col">Participantes</th> -->
+                            </tr>
+                          </tfoot>
                           <tbody id="candidatesResults">
                           </tbody>
                         </table>
@@ -275,7 +266,7 @@
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Blockchain 2019</span>
+            <span>Copyright &copy; Blockchain UNIS 2019</span>
           </div>
         </div>
       </footer>
@@ -299,6 +290,9 @@
 
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="js/demo/datatables-demo.js"></script>
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
