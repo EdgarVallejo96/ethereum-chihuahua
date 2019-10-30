@@ -2644,12 +2644,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x5A567Dd489C6dDfAf0427239EE6AB5b409b9461a",
-      "transactionHash": "0xfc85c19ea9b09dd8ee2ed1f099f0196ca4123954de7e8294fe71a2f1492b833d"
+      "address": "0x45924001188D396a84537CacB0F4cAc1E1e24C77",
+      "transactionHash": "0x7d537b3a20f2e0d09c39eb54e4453f11bd5dc5a69140efa809e4c36538f63316"
     }
   },
   "schemaVersion": "3.0.16",
-  "updatedAt": "2019-10-28T04:11:56.094Z",
+  "updatedAt": "2019-10-30T23:27:14.142Z",
   "devdoc": {
     "methods": {}
   },
