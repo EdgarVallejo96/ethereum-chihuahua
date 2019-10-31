@@ -1,0 +1,37 @@
+Reports.deployed().then(function(instance) { app = instance })
+
+app.reports(1).then(function(c) { report = c;})
+app.stakeholders(1).then(function(c) { stakeholder = c;})
+stakeholder
+app.stakeholders(1).then(function(c) { stakeholderId = Number(c[0]);})
+stakeholderId
+app.stakeholders(1).then(function(c) { stakeholderWallet = (c[1]);})
+stakeholderWallet
+app.stakeholders(1).then(function(c) { reportId = Number(c[2]);})
+reportId
+
+app.stakeholders(1).then(function(c) {
+    stakeholder = {
+        id: Number(c[0]),
+        walletAddress: c[1],
+        reportId:  Number(c[2])
+    };
+     })
+
+stakeholderObject = {
+        id: Number(stakeholder[0]),
+        walletAddress: stakeholder[1],
+        reportId:  Number(stakeholder[2])
+    }
+
+
+app.stakeholdersCount().then(count => { stakeholdersCount = count})
+stakeholdersCount.toNumber()
+
+app.verifyReport(1).then(response => { app.reports(1).then(function(c) { report = c;})})
+report 
+
+
+
+ web3.eth.getAccounts().then(accounts => { accounts = accounts; })
+ accounts[0]

@@ -208,56 +208,40 @@
 
       
           </div>
+          <div id="content" style="display: none;">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Edad</th>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Enfermedad</th>
+                  <th scope="col">Tratamiento</th>
+                  <th scope="col">Resultados</th>
+                  <th scope="col">Verificado</th>
+                  <th scope="col">Verificar</th>
+                  <th scope="col">Índice</th>
+                  <th scope="col">Agregar</th>
 
-        <!-- Content Row -->
-
-          <div class="row">
-
-            <!-- Area Chart -->
-            <div class="col-xl-8 col-lg-7">
-              <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Chihuahuas</h6>
-                  
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                    <div id="loader">
-                        <p class="text-center">Cargando...</p>
-                      </div>
-                      <div id="content" style="display: none;">
-                        <table class="table">
-                          <thead>
-                            <tr>
-                              <th scope="col">ID</th>
-                              <th scope="col">Nombre</th>
-                              <th scope="col">Edad</th>
-                              <th scope="col">Fecha</th>
-                              <th scope="col">Enfermedad</th>
-                              <th scope="col">Tratamiento</th>
-                              <th scope="col">Resultados</th>
-                            </tr>
-                          </thead>
-                          <tbody id="candidatesResults">
-                          </tbody>
-                        </table>
-                        <hr/>
-                        <form onSubmit="App.castVote(); return false;">
-                          <div class="form-group">
-                            <label for="candidatesSelect">Selecccionar reporte</label>
-                            <select class="form-control" id="candidatesSelect">
-                            </select>
-                          </div>
-                          <button type="submit" class="btn btn-primary">Pagar</button>
-                          <hr />
-                        </form>
-                        <p id="accountAddress" class="text-center"></p>
-                      </div>
-                </div>
+                </tr>
+              </thead>
+              <tbody id="reportsResults">
+              </tbody>
+            </table>
+            <hr/>
+            <!-- <form onSubmit="App.castVote(); return false;">
+              <div class="form-group">
+                <label for="candidatesSelect">Selecccionar reporte</label>
+                <select class="form-control" id="candidatesSelect">
+                </select>
               </div>
-            </div>
-
+              <button type="submit" class="btn btn-primary">Pagar</button>
+              <hr />
+            </form> -->
+            <p id="accountAddress" class="text-center"></p>
+            <a class="text-center" href="./formulario.html">Crear Reporte</a>
+            <a class="text-center" href="./formulario.html">Compra de Reportes</a>
           </div>
 
            
@@ -279,6 +263,7 @@
       </footer>
       <!-- End of Footer -->
 
+      <p id="accountAddress" class="text-center"></p>
     </div>
     <!-- End of Content Wrapper -->
 
