@@ -27,7 +27,9 @@
       <div class="col-lg-1">
       </div>
       <div class="col-lg-8">
-        <h1 class="text-center">Verificación e Indexación de Reportes</h1>
+        <h1 class="text-center">Ethereum Chihuahua</h1>
+        <h3 class="text-center">Verificación e Indexación de Reportes</h3>
+
         <hr />
         <br />
         <div id="loader">
@@ -54,47 +56,87 @@
             <tbody id="reportsResults">
             </tbody>
           </table>
-          <hr />
-          <!-- <form onSubmit="App.castVote(); return false;">
-              <div class="form-group">
-                <label for="candidatesSelect">Selecccionar reporte</label>
-                <select class="form-control" id="candidatesSelect">
-                </select>
-              </div>
-              <button type="submit" class="btn btn-primary">Pagar</button>
-              <hr />
-            </form> -->
-          <p id="accountAddress" class="text-center"></p>
-          <a class="text-center" href="./formulario.html">Crear Reporte</a>
+
         </div>
-
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6">
-              <h3>Índices para Consulta de Reportes</h3>
-              <div class="list-group" id="indexesResults">
-
-
-               <!--  <a class="list-group-item clearfix">
-                  Action1
-                  <span class="pull-right">
-                    <span class="btn btn-xs btn-default" onclick="">
-                      <span aria-hidden="true">Ver Reportes</span>
-                    </span>
-                  </span>
-                </a>
- -->
-
-
-              </div>
-            </div>
-
-          </div>
-        </div>
-        
-
       </div>
     </div>
+
+
+    <div class="row">
+      <div class="col-lg-4">
+      </div>
+      <div class="col-lg-4">
+        <!-- <p id="accountAddress" class="text-center"></p> -->
+        <p class ="text-center" id = "accountAddress"></p>
+      </div>
+      <div class="col-lg-4">
+      </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-lg-5">
+        </div>
+        <div class="col-lg-2">  
+          <span class='btn btn-xs btn-default' onclick=''>
+            <a aria-hidden='true' href="./formulario.html">Crear Reporte</a>
+          </span>
+        </div>
+        <div class="col-lg-3">
+        </div>
+      </div>
+
+
+
+    <div class="row">
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-8">
+        <h3 class="text-center" style="padding-bottom: 15px;">Índices para Consulta de Reportes</h3>
+        <div class="list-group" id="indexesResults">
+        </div>
+      </div>
+      <div class="col-lg-3">
+      </div>
+    </div>
+
+
+
+   <div class="row" id = "indexReports" style="display: none; padding-bottom: 30px;" >
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-8">
+          <h3 class="text-center">Reportes por Índice</h3>
+  
+          <hr />
+          <br />
+          <div id="content2" style="display: none;">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Edad</th>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Enfermedad</th>
+                  <th scope="col">Tratamiento</th>
+                  <th scope="col">Resultados</th>
+                  <th scope="col">Verificado</th>
+  
+                </tr>
+              </thead>
+               <tbody id="reportsResultsByIndex">
+              </tbody>
+            </table>
+  
+          </div>
+        </div>
+      </div>
+
+
+  </div>
+  </div>
   </div>
 
 
