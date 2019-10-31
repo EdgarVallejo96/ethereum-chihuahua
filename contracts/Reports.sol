@@ -41,6 +41,8 @@ contract Reports {
         addReport("Sam", 5, "11-11-11", "Válvula cardíaca", "Poca actividad", "Curación exitosa.");
         addReport("Foli", 3, "12-12-12", "Hipoglucemia", "Comida con mayor azúcar", "No se curó, falta mayor tratamiento.");
         addIndex(0x3D4921D9c0C9C07914E4F7006012d7E8CE1c5836, "Periodontitis", 1);
+        addIndex(0xFbDEeD01E1520024c4D26f66f3B8e7461cCCD47C, "Periodontitis", 1);
+        addIndex(0xFbDEeD01E1520024c4D26f66f3B8e7461cCCD47C, "Curación exitosa", 2);
     }
 
     function addReport (
@@ -55,7 +57,7 @@ contract Reports {
     }
 
 
-     function addStakeholder (
+    function addStakeholder (
     address _walletAddress,
     uint _reportId) public {
         stakeholdersCount ++;
