@@ -277,10 +277,8 @@ App = {
   }
 };
 
-
-
-$(function () {
-  $(window).load(function () {
+$(function() {
+  $(document).ready(function() {
     App.init();
   });
 });
