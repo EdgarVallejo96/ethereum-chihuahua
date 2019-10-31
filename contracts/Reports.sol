@@ -1,7 +1,7 @@
 pragma solidity ^0.5.8;
 
 contract Reports {
-    // Model a Candidate
+    // Model a Report
     struct Report {
         uint id;
         string name;
@@ -24,8 +24,8 @@ contract Reports {
         uint reportId;
     }
 
-    // Store Candidates
-    // Fetch Candidates
+    // Store reports, stakeholders and indexes
+    // Fetch reports, stakeholders and indexes
     mapping(uint => Report) public reports;
     mapping(uint => Stakeholder) public stakeholders;
     mapping(uint => Index) public indexes;

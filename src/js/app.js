@@ -83,7 +83,8 @@ App = {
             "</td><td>" + verified +
             // "</td><td><button type='button' onclick= 'App.castVerification(" + App.account.toString() + ", " + id +")'>Verificar</button>" +
             "</td><td><button type='button' onclick= 'App.castVerification(" + id + ")'>Verificar</button>" +
-
+            "</td><td><input type='text'/>" +
+            "</td><td><button type='button' onclick= 'App.castVerification(" + id + ")'>Agregar</button>" +
             "</td></tr>"
           reportsResults.append(reportTemplate);
         });
@@ -121,7 +122,7 @@ App = {
 
               indexesResults.append(indexTemplate);
               differentIndexes = differentIndexes.concat(label);
-              //console.log("differentIndexes:", differentIndexes);
+              console.log("differentIndexes:", differentIndexes);
             }
 
           });
