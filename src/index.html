@@ -38,13 +38,18 @@
                   <th scope="col">Enfermedad</th>
                   <th scope="col">Tratamiento</th>
                   <th scope="col">Resultados</th>
+                  <th scope="col">Verificado</th>
+                  <th scope="col">Verificar</th>
+                  <th scope="col">Índice</th>
+                  <th scope="col">Agregar</th>
+
                 </tr>
               </thead>
-              <tbody id="candidatesResults">
+              <tbody id="reportsResults">
               </tbody>
             </table>
             <hr/>
-            <form onSubmit="App.castVote(); return false;">
+            <!-- <form onSubmit="App.castVote(); return false;">
               <div class="form-group">
                 <label for="candidatesSelect">Selecccionar reporte</label>
                 <select class="form-control" id="candidatesSelect">
@@ -52,14 +57,17 @@
               </div>
               <button type="submit" class="btn btn-primary">Pagar</button>
               <hr />
-            </form>
+            </form> -->
             <p id="accountAddress" class="text-center"></p>
+            <a class="text-center" href="./formulario.html">Crear Reporte</a>
+            <a class="text-center" href="./formulario.html">Compra de Reportes</a>
           </div>
         </div>
       </div>
+      <p id="accountAddress" class="text-center"></p>
     </div>
 
-    <a href="./formulario.html">Crear reporte</a>
+   
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
