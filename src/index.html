@@ -168,7 +168,7 @@
              <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
               <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-              <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+              <a href="./formulario.html" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
             </div>
          
           <!-- Content Row -->
@@ -229,7 +229,7 @@
 
                 </tr>
               </thead>
-               <tbody id="reportsResultsByIndex">
+               <tbody id="reportsResults">
               </tbody>
             </table>
   
@@ -240,7 +240,52 @@
         <!-- /.container-fluid -->
 
       </div>
-      <!-- End of Main Content -->      
+      <!-- End of Main Content -->   
+  
+      <div class="row">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-8">
+          <h3 class="text-center" style="padding-bottom: 15px;">Índices para Consulta de Reportes</h3>
+          <div class="list-group" id="indexesResults">
+          </div>
+        </div>
+        <div class="col-lg-3">
+        </div>
+      </div>
+  
+  
+  
+     <div class="row" id = "indexReports" style="display: none; padding-bottom: 30px;" >
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-8">
+            <h3 class="text-center">Reportes por Índice</h3>
+    
+            <hr />
+            <br />
+            <div id="content2" style="display: none;">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Edad</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Enfermedad</th>
+                    <th scope="col">Tratamiento</th>
+                    <th scope="col">Resultados</th>
+                    <th scope="col">Verificado</th>
+    
+                  </tr>
+                </thead>
+                 <tbody id="reportsResultsByIndex">
+                </tbody>
+              </table>
+    
+            </div>
+          </div>
+        </div>
 
       <!-- Footer -->
       <footer class="sticky-footer bg-white">
