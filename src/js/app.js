@@ -41,38 +41,38 @@ App = {
     content.hide();
 
     // Load account data
-      web3.eth.getCoinbase(function (err, account) {
-       console.log("getCoinbase() account:", account);
+    web3.eth.getCoinbase(function (err, account) {
+      //console.log("getCoinbase() account:", account);
       if (err === null) {
         App.account = account.toString();
         console.log("App.account:", App.account);
-        document.getElementById("accountAddress").innerHTML = account;
+        document.getElementById("accountAddress").innerHTML = "Your ethereum wallet address: " + account;
         //$("accountAddress").html("Your Account: " + account);
       }
     });
 
-      // Load contract data 
-      App.contracts.Reports.deployed().then(function (instance) {
-        reportsInstance = instance;
-        return reportsInstance.reportsCount();
-      }).then(function (reportsCount) {
-        var reportsResults = $("#reportsResults");
-        reportsResults.empty();
+    // Load contract data 
+    App.contracts.Reports.deployed().then(function (instance) {
+      reportsInstance = instance;
+      return reportsInstance.reportsCount();
+    }).then(function (reportsCount) {
+      var reportsResults = $("#reportsResults");
+      reportsResults.empty();
 
-        for (var i = 1; i <= reportsCount; i++) {
-          reportsInstance.reports(i).then(function (report) {
-            var id = report[0];
-            var name = report[1];
-            var voteCount = report[2];
-            var fecha = report[3];
-            var enfermedad = report[4];
-            var tratamiento = report[5];
-            var resultados = report[6];
-            var verified = report[7];
+      for (var i = 1; i <= reportsCount; i++) {
+        reportsInstance.reports(i).then(function (report) {
 
+          var id = report[0];
+          var name = report[1];
+          var voteCount = report[2];
+          var fecha = report[3];
+          var enfermedad = report[4];
+          var tratamiento = report[5];
+          var resultados = report[6];
+          var verified = report[7];
 
-            // Render report Result
-            var reportTemplate = 
+          // Render report Result
+          var reportTemplate =
             "<tr><th>" + id +
             "</th><td>" + name +
             "</td><td>" + voteCount +
@@ -81,45 +81,203 @@ App = {
             "</th><td>" + tratamiento +
             "</td><td>" + resultados +
             "</td><td>" + verified +
-           // "</td><td><button type='button' onclick= 'App.castVerification(" + App.account.toString() + ", " + id +")'>Verificar</button>" +
-            "</td><td><button type='button' onclick= 'App.castVerification(" + id +")'>Verificar</button>" +
+            // "</td><td><button type='button' onclick= 'App.castVerification(" + App.account.toString() + ", " + id +")'>Verificar</button>" +
+            "</td><td><button type='button' onclick= 'App.castVerification(" + id + ")'>Verificar</button>" +
 
             "</td></tr>"
-            reportsResults.append(reportTemplate);
+          reportsResults.append(reportTemplate);
+        });
+      }
+
+      return reportsInstance.indexesCount();
+
+    }).then(function (indexesCount) {
+      var indexesResults = $("#indexesResults");
+      indexesResults.empty();
+      var differentIndexes = [];
+
+      if (indexesCount != 0) {
+
+        for (var i = 1; i <= indexesCount; i++) {
+
+          reportsInstance.indexes(i).then(function (index) {
+
+            //console.log("index:", index);
+            var id = index[0];
+            var stakeholderAddress = index[1];
+            var label = index[2];
+            var reportId = index[3];
+
+            //console.log("Current index:", label);
+            if (!(differentIndexes.includes(label))) {
+              var indexTemplate =
+                " <a class='list-group-item clearfix'>" + label +
+                " <span class='pull-right'> " +
+                "   <span class='btn btn-xs btn-default'> " +
+                "     <span onclick='App.showReportsByIndex(&#39" + label + "&#39)'>Ver Reportes</span> " +
+                "   </span> " +
+                " </span> " +
+                " </a> "
+
+              indexesResults.append(indexTemplate);
+              differentIndexes = differentIndexes.concat(label);
+              //console.log("differentIndexes:", differentIndexes);
+            }
+
           });
         }
+      }
 
-        loader.hide();
-        content.show();
-      }).catch(function (error) {
-        console.warn(error);
-      });
+      loader.hide();
+      content.show();
+    }).catch(function (error) {
+      console.warn(error);
+    });
   },
 
-  castVerification: function(reportId) {
+  castVerification: function (reportId) {
     let reportsInstance;
-    console.log("castVerification() con", App.account.toString(), "y", reportId);
-    App.contracts.Reports.deployed().then(function(instance) {
+    //console.log("castVerification() con", App.account.toString(), "y", reportId);
+    App.contracts.Reports.deployed().then(function (instance) {
       reportsInstance = instance;
 
-     /*  return reportsInstance.addStakeholder(App.account, reportId);
-    }).then(function(result) {
-      console.log("User wallet was correctly.");
-      return reportsInstance.verifyReport(reportId); */
+      /*  return reportsInstance.addStakeholder(App.account, reportId);
+     }).then(function(result) {
+       console.log("User wallet was correctly.");
+       return reportsInstance.verifyReport(reportId); */
 
       return reportsInstance.verifyReportFinal(App.account, reportId);
 
-    }).then(function(verificationResult) {
-      console.log("Verification was cast correctly.");
+    }).then(function (verificationResult) {
+      //console.log("Verification was cast correctly.");
       location.reload();
-    }).catch(function(err) {
+    }).catch(function (err) {
       console.error(err);
     });
 
+  },
+
+  showReportsByIndex: function (indexLabel) {
+    let reportsInstance;
+    //console.log("showReportsByIndex() con", indexLabel);
+    App.contracts.Reports.deployed().then(function (instance) {
+      reportsInstance = instance;
+      return reportsInstance.indexesCount();
+    }).then(function (indexesCount) {
+      /* var reportsByIndexResults = $("#reportsByIndexResults");
+      reportsByIndexResults.empty();
+ */
+      let iteratedIndexes = 0;
+      let reportsWithIndex = [];
+      //console.log("indexesCount:", indexesCount.toNumber());
+      indexesCount = indexesCount.toNumber();
+
+      for (var i = 1; i <= indexesCount; i++) {
+
+        reportsInstance.indexes(i).then(function (index) {
+          iteratedIndexes++;
+          //console.log("iteratedIndexes:", iteratedIndexes);
+
+          //console.log("index:", index);
+
+          var id = index[0].toNumber();
+          var stakeholderAddress = index[1];
+          var label = index[2];
+          var reportId = index[3].toNumber();
+          //console.log("Current index:", label);
+          //console.log("iteratedIndexes:", iteratedIndexes);
+
+          if (indexLabel === label) {
+            //console.log("Reporte correspondiente:", reportId);
+            if (!(reportsWithIndex.includes(reportId.toString()))) {
+              //console.log("Pushear", reportId);
+              reportsWithIndex = reportsWithIndex.concat(reportId.toString());
+              //console.log("reportsWithIndex después de pushear:", reportsWithIndex);
+            }
+          }
+          if (iteratedIndexes === indexesCount) {
+            //console.log("iteratedIndexes == indexesCount");
+            if (reportsWithIndex.length > 0) {
+              //console.log("reportsWithIndex final:", reportsWithIndex);
+              App.showReportsByIndexTable(reportsWithIndex);
+            }
+          }
+
+
+
+        }).catch(function (err) {
+          console.error(err);
+        });
+      }
+
+
+    });
+
+
+  },
+
+  showReportsByIndexTable: function (reportsArray) {
+    //console.log("showReportsByIndexTable() con", reportsArray);
+    let foundReport = false;
+
+    var loader = $("#loader2");
+    var content = $("#content2");
+    var contentHeader = $("#indexReports");
+
+    loader.show();
+    content.hide();
+
+    App.contracts.Reports.deployed().then(function (instance) {
+      reportsInstance = instance;
+      return reportsInstance.reportsCount();
+    }).then(function (reportsCount) {
+      var reportsResults2 = $("#reportsResultsByIndex");
+      reportsResults2.empty();
+
+      for (var i = 1; i <= reportsCount; i++) {
+        reportsInstance.reports(i).then(function (report) {
+
+          var id = report[0];
+          var name = report[1];
+          var voteCount = report[2];
+          var fecha = report[3];
+          var enfermedad = report[4];
+          var tratamiento = report[5];
+          var resultados = report[6];
+          var verified = report[7];
+
+          // Render report Result
+          var reportTemplate2 =
+            "<tr><th>" + id +
+            "</th><td>" + name +
+            "</td><td>" + voteCount +
+            "</th><td>" + fecha +
+            "</td><td>" + enfermedad +
+            "</th><td>" + tratamiento +
+            "</td><td>" + resultados +
+            "</td><td>" + verified +
+            "</td></tr>"
+
+          if (verified === true && (reportsArray.includes(id.toString()))) {
+            contentHeader.show();
+            reportsResults2.append(reportTemplate2);
+
+          }
+        });
+      }
+
+      loader.hide();
+      content.show();
+
+    }).catch(function (err) {
+      console.error(err);
+    });
+
+
   }
-
-
 };
+
+
 
 $(function () {
   $(window).load(function () {
